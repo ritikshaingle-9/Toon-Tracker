@@ -2,6 +2,7 @@ import express from 'express';
 import cors from "cors";
 import mongoose from 'mongoose';
 import dotenv from "dotenv";
+import { postTvShows } from './controllers/tv-shows.js';
 dotenv.config();
 
 const app = express();
@@ -16,39 +17,24 @@ if (conn){
 }
 };
 
-
-const TvShow = [
-    {
-        id:1,
-        moviename:"DDLJ",
-    }
-]
-
 app.get("/health",(req,res)=>{
     res.status(200).json({
         message:"server is running"});
     });
 
-app.get("/getTvShows",(req,res)=>{
+app.get("/TvShows",(req,res)=>{
     res.status(200).json({
        success:true,
-       data:TvShow,
+       data:"hhh",
        message:"Tv show fetched successfully",
     });
 })
 
-app.post("/postTvShows",(req,res)=>{
-    res.status(200).json({
-        success:true,
-        message:"created"
-    })
-})
+app.post("/TvShows", postTvShows);
 
 
 
-
-
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5002;
 
 app.listen(PORT , ()=>{
     console.log('server is running on port ${PORT}');

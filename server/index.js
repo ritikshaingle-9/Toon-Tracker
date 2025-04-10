@@ -2,7 +2,7 @@ import express from 'express';
 import cors from "cors";
 import mongoose from 'mongoose';
 import dotenv from "dotenv";
-import { postTvShows } from './controllers/tv-shows.js';
+import { getTvShows, postTvShows,getTvShowById,deleteTvShowById } from './controllers/tv-shows.js';
 dotenv.config();
 
 const app = express();
@@ -22,15 +22,10 @@ app.get("/health",(req,res)=>{
         message:"server is running"});
     });
 
-app.get("/TvShows",(req,res)=>{
-    res.status(200).json({
-       success:true,
-       data:"hhh",
-       message:"Tv show fetched successfully",
-    });
-})
-
+app.get("/TvShows",getTvShows);
 app.post("/TvShows", postTvShows);
+app.get("/TvShow/:id",getTvShowById);
+app.delete("/TvShow/:id",deleteTvShowById);
 
 
 
